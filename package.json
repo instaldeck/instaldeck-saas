@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "test": "echo 'Tests not yet configured'",
+    "audit": "npm audit --production"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
