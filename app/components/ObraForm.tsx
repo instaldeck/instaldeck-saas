@@ -27,9 +27,9 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
     setLoading(true);
 
     try {
-      const payload = {
+      const payload: Partial<Obra> = {
         ...formData,
-        budget: formData.budget ? parseFloat(formData.budget as any) : null,
+        budget: formData.budget ? parseFloat(formData.budget as any) : undefined,
       };
       await onSubmit(payload);
     } catch (err) {
