@@ -57,14 +57,14 @@ export default function ClientesPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('¿Estás seguro de que quieres eliminar este cliente?')) return;
+    if (!confirm('¿Eliminar este cliente?')) return;
 
     try {
       setDeleting(id);
       await apiFetch(`/api/clientes/${id}`, { method: 'DELETE' });
       await loadClientes();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error deleting cliente');
+      setError(err instanceof Error ? err.message : 'Error eliminando cliente');
     } finally {
       setDeleting(null);
     }
@@ -81,85 +81,81 @@ export default function ClientesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto py-8 px-4">
+    <div style={{ backgroundColor: 'var(--gray-50)' }} className="min-h-screen">
+      <div className="max-w-7xl mx-auto py-8 px-6 sm:px-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Clientes</h1>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--navy)' }}>
+            Clientes
+          </h1>
           <button
             onClick={openCreate}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="btn-primary"
           >
             + Nuevo Cliente
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
+          <div className="mb-4 p-4 rounded-lg" style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}>
             {error}
           </div>
         )}
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-gray-500">Cargando...</p>
+            <p style={{ color: 'var(--gray-600)' }}>Cargando...</p>
           </div>
         ) : clientes.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500">
-              No hay clientes. Crea uno nuevo para comenzar.
-            </p>
+            <p style={{ color: 'var(--gray-600)' }}>No hay clientes. Crea uno nuevo para comenzar.</p>
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                    Nombre
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                    Teléfono
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                    Ciudad
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                    Acciones
-                  </th>
+          <div className="card overflow-hidden">
+            <table className="w-full">
+              <thead style={{ backgroundColor: 'var(--gray-50)', borderColor: 'var(--gray-200)' }}>
+                <tr style={{ borderBottomWidth: '1px', borderBottomColor: 'var(--gray-200)' }}>
+                  <th className="table-header">Nombre</th>
+                  <th className="table-header">Email</th>
+                  <th className="table-header">Teléfono</th>
+                  <th className="table-header">Ciudad</th>
+                  <th className="table-header">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody>
                 {clientes.map((cliente) => (
-                  <tr key={cliente.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                  <tr
+                    key={cliente.id}
+                    style={{ borderBottomColor: 'var(--gray-100)' }}
+                    className="border-b hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="table-cell font-medium" style={{ color: 'var(--navy)' }}>
                       {cliente.name}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="table-cell" style={{ color: 'var(--gray-700)' }}>
                       {cliente.email || '-'}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="table-cell" style={{ color: 'var(--gray-700)' }}>
                       {cliente.phone || '-'}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="table-cell" style={{ color: 'var(--gray-700)' }}>
                       {cliente.city || '-'}
                     </td>
-                    <td className="px-6 py-4 text-sm space-x-2">
-                      <button
-                        onClick={() => openEdit(cliente.id)}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        onClick={() => handleDelete(cliente.id)}
-                        disabled={deleting === cliente.id}
-                        className="text-red-600 hover:text-red-900 disabled:opacity-50"
-                      >
-                        {deleting === cliente.id ? 'Eliminando...' : 'Eliminar'}
-                      </button>
+                    <td className="table-cell">
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => openEdit(cliente.id)}
+                          className="btn-ghost text-sm"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleDelete(cliente.id)}
+                          disabled={deleting === cliente.id}
+                          className="text-red-600 hover:text-red-900 disabled:opacity-50 text-sm font-medium"
+                        >
+                          {deleting === cliente.id ? 'Eliminando...' : 'Eliminar'}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

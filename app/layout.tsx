@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Instaldeck SaaS",
-  description: "Construction project management system",
+  title: "Instaldeck",
+  description: "Gestión de obras, clientes y trabajadores",
 };
 
 export default function RootLayout({
@@ -28,31 +28,32 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-gray-50">
-        <nav className="bg-white border-b border-gray-200 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <Link href="/" className="font-bold text-xl text-gray-900">
-                  Instaldeck
-                </Link>
-              </div>
+      <body className="min-h-full flex flex-col" style={{ backgroundColor: 'var(--gray-50)' }}>
+        <nav className="border-b" style={{ backgroundColor: 'var(--navy-dark)', borderColor: 'var(--navy)' }}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-8">
+            <div className="flex justify-between h-16 items-center">
+              <Link href="/" className="font-bold text-2xl" style={{ color: 'var(--royal-blue-light)' }}>
+                Instaldeck
+              </Link>
               <div className="flex items-center gap-8">
                 <Link
                   href="/modules/obras"
-                  className="text-gray-600 hover:text-gray-900 font-medium"
+                  className="font-medium transition-colors hover:text-royal-blue-light"
+                  style={{ color: 'var(--gray-200)' }}
                 >
                   Obras
                 </Link>
                 <Link
                   href="/modules/clientes"
-                  className="text-gray-600 hover:text-gray-900 font-medium"
+                  className="font-medium transition-colors hover:text-royal-blue-light"
+                  style={{ color: 'var(--gray-200)' }}
                 >
                   Clientes
                 </Link>
                 <Link
                   href="/modules/trabajadores"
-                  className="text-gray-600 hover:text-gray-900 font-medium"
+                  className="font-medium transition-colors hover:text-royal-blue-light"
+                  style={{ color: 'var(--gray-200)' }}
                 >
                   Trabajadores
                 </Link>

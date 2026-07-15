@@ -1,51 +1,60 @@
 import Link from "next/link";
 
 export default function Home() {
+  const modules = [
+    {
+      href: "/modules/obras",
+      title: "Obras",
+      desc: "Proyectos de construcción",
+      icon: "🏗️",
+    },
+    {
+      href: "/modules/clientes",
+      title: "Clientes",
+      desc: "Gestión de clientes",
+      icon: "👥",
+    },
+    {
+      href: "/modules/trabajadores",
+      title: "Trabajadores",
+      desc: "Equipo de trabajo",
+      icon: "👷",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--gray-50)' }}>
+      <div className="max-w-6xl mx-auto py-20 px-6 sm:px-8">
+        <div className="text-center mb-20">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: 'var(--navy)' }}>
             Panel de Control
           </h1>
-          <p className="text-xl text-gray-600">
-            Gestiona tus obras, clientes y trabajadores en un solo lugar
+          <p className="text-xl" style={{ color: 'var(--gray-600)' }}>
+            Gestiona obras, clientes y trabajadores en un solo lugar
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Link
-            href="/modules/obras"
-            className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow p-8"
-          >
-            <div className="text-4xl mb-4">🏗️</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Obras</h2>
-            <p className="text-gray-600">
-              Crea y gestiona tus proyectos de construcción
-            </p>
-          </Link>
-
-          <Link
-            href="/modules/clientes"
-            className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow p-8"
-          >
-            <div className="text-4xl mb-4">👥</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Clientes</h2>
-            <p className="text-gray-600">
-              Administra la información de tus clientes
-            </p>
-          </Link>
-
-          <Link
-            href="/modules/trabajadores"
-            className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow p-8"
-          >
-            <div className="text-4xl mb-4">👷</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Trabajadores</h2>
-            <p className="text-gray-600">
-              Gestiona tu equipo de trabajo
-            </p>
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {modules.map((module) => (
+            <Link
+              key={module.href}
+              href={module.href}
+              className="card p-8 hover:shadow-lg cursor-pointer group"
+            >
+              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+                {module.icon}
+              </div>
+              <h2
+                className="text-2xl font-bold mb-2"
+                style={{ color: 'var(--navy)' }}
+              >
+                {module.title}
+              </h2>
+              <p style={{ color: 'var(--gray-600)' }}>
+                {module.desc}
+              </p>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

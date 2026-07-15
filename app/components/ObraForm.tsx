@@ -33,18 +33,22 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
       };
       await onSubmit(payload);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error saving obra');
+      setError(err instanceof Error ? err.message : 'Error guardando obra');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && <div className="p-3 bg-red-100 text-red-700 rounded">{error}</div>}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 rounded-lg" style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}>
+          {error}
+        </div>
+      )}
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
           Nombre *
         </label>
         <input
@@ -52,12 +56,12 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
           required
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="input-field mt-2"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
           Descripción
         </label>
         <textarea
@@ -65,14 +69,14 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="input-field mt-2"
           rows={3}
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Fecha de inicio *
           </label>
           <input
@@ -82,12 +86,12 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
             onChange={(e) =>
               setFormData({ ...formData, start_date: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Fecha de fin
           </label>
           <input
@@ -96,14 +100,14 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
             onChange={(e) =>
               setFormData({ ...formData, end_date: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Estado
           </label>
           <select
@@ -111,7 +115,7 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
             onChange={(e) =>
               setFormData({ ...formData, status: e.target.value as any })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           >
             <option value="active">Activo</option>
             <option value="paused">Pausado</option>
@@ -121,7 +125,7 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Presupuesto
           </label>
           <input
@@ -131,7 +135,7 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
             onChange={(e) =>
               setFormData({ ...formData, budget: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
       </div>
@@ -140,14 +144,14 @@ export default function ObraForm({ initial, onSubmit, onCancel }: ObraFormProps)
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+          className="btn-secondary"
         >
           Cancelar
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+          className="btn-primary disabled:opacity-50"
         >
           {loading ? 'Guardando...' : initial ? 'Actualizar' : 'Crear'}
         </button>

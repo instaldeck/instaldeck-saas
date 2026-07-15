@@ -35,19 +35,23 @@ export default function TrabajadorForm({
     try {
       await onSubmit(formData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error saving trabajador');
+      setError(err instanceof Error ? err.message : 'Error guardando trabajador');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && <div className="p-3 bg-red-100 text-red-700 rounded">{error}</div>}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 rounded-lg" style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}>
+          {error}
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Nombre *
           </label>
           <input
@@ -57,12 +61,12 @@ export default function TrabajadorForm({
             onChange={(e) =>
               setFormData({ ...formData, first_name: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Apellido *
           </label>
           <input
@@ -72,52 +76,52 @@ export default function TrabajadorForm({
             onChange={(e) =>
               setFormData({ ...formData, last_name: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Email
           </label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Teléfono
           </label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Puesto
           </label>
           <input
             type="text"
             value={formData.role}
             onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Departamento
           </label>
           <input
@@ -126,14 +130,14 @@ export default function TrabajadorForm({
             onChange={(e) =>
               setFormData({ ...formData, department: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Fecha de contratación *
           </label>
           <input
@@ -143,12 +147,12 @@ export default function TrabajadorForm({
             onChange={(e) =>
               setFormData({ ...formData, hire_date: e.target.value })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-semibold" style={{ color: 'var(--gray-900)' }}>
             Estado
           </label>
           <select
@@ -156,7 +160,7 @@ export default function TrabajadorForm({
             onChange={(e) =>
               setFormData({ ...formData, status: e.target.value as any })
             }
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="input-field mt-2"
           >
             <option value="active">Activo</option>
             <option value="on_leave">Baja</option>
@@ -169,14 +173,14 @@ export default function TrabajadorForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+          className="btn-secondary"
         >
           Cancelar
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+          className="btn-primary disabled:opacity-50"
         >
           {loading ? 'Guardando...' : initial ? 'Actualizar' : 'Crear'}
         </button>
