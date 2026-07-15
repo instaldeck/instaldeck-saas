@@ -37,7 +37,12 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2.5 bg-royal-blue text-white rounded-lg font-medium hover:bg-navy active:bg-navy-dark;
+    @apply px-4 py-2.5 text-white rounded-lg font-medium;
+    background-color: var(--royal-blue);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--navy);
   }
 
   .btn-secondary {
@@ -45,7 +50,12 @@ body {
   }
 
   .btn-ghost {
-    @apply px-4 py-2.5 text-royal-blue hover:bg-sky-blue rounded-lg font-medium;
+    @apply px-4 py-2.5 rounded-lg font-medium;
+    color: var(--royal-blue);
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--sky-blue);
   }
 
   .card {
@@ -53,7 +63,8 @@ body {
   }
 
   .input-field {
-    @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent bg-white text-gray-900;
+    @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white text-gray-900;
+    --tw-ring-color: var(--royal-blue);
   }
 
   .input-field::placeholder {
@@ -69,22 +80,30 @@ body {
   }
 
   .badge {
-    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .badge-primary {
-    @apply badge bg-sky-blue text-royal-blue;
+    background-color: var(--sky-blue);
+    color: var(--royal-blue);
   }
 
   .badge-success {
-    @apply badge bg-emerald-100 text-emerald-700;
+    background-color: #d1fae5;
+    color: #059669;
   }
 
   .badge-warning {
-    @apply badge bg-amber-100 text-amber-700;
+    background-color: #fef3c7;
+    color: #d97706;
   }
 
   .badge-danger {
-    @apply badge bg-red-100 text-red-700;
+    background-color: #fee2e2;
+    color: #dc2626;
   }
 }
