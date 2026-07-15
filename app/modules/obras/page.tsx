@@ -2,10 +2,11 @@
 
 import Modal from '@/app/components/Modal';
 import ObraForm from '@/app/components/ObraForm';
+import { KanbanBoard } from '@/app/components/KanbanBoard';
 import { apiFetch } from '@/app/lib/api-client';
 import { Obra } from '@/lib/supabase/types';
 import { useEffect, useState } from 'react';
-import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
+import { IconPlus, IconEdit, IconTrash, IconLayoutKanban, IconTable } from '@tabler/icons-react';
 
 const statusConfig: Record<string, { color: string; label: string }> = {
   active: { color: '#2563eb', label: 'Activa' },
@@ -22,6 +23,7 @@ export default function ObrasPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState<'table' | 'kanban'>('table');
 
   const editingObra = editingId ? obras.find((o) => o.id === editingId) : undefined;
 
@@ -139,7 +141,41 @@ export default function ObrasPage() {
           </div>
         )}
 
+        {/* View Mode Toggle */}
+        <div className="flex gap-2 mb-6">
+          <button
+            onClick={() => setViewMode('table')}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: viewMode === 'table' ? '#2563eb' : '#e5e7eb',
+              color: viewMode === 'table' ? 'white' : '#64748b',
+            }}
+          >
+            <IconTable size={16} />
+            Tabla
+          </button>
+          <button
+            onClick={() => setViewMode('kanban')}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: viewMode === 'kanban' ? '#2563eb' : '#e5e7eb',
+              color: viewMode === 'kanban' ? 'white' : '#64748b',
+            }}
+          >
+            <IconLayoutKanban size={16} />
+            Kanban
+          </button>
+        </div>
+
+        {/* Kanban View */}
+        {viewMode === 'kanban' && !loading && (
+          <div className="mb-8">
+            <KanbanBoard obras={obras} onUpdate={loadObras} />
+          </div>
+        )}
+
         {/* Table Card */}
+        {viewMode === 'table' && (
         <div className="rounded-lg border overflow-hidden" style={{ backgroundColor: 'white', borderColor: '#dfe5ed', boxShadow: '0 5px 18px rgba(15,23,42,0.055)' }}>
           {/* Toolbar */}
           <div className="px-6 py-4 border-b" style={{ borderColor: '#e5e7eb', backgroundColor: '#f8fafc' }}>
@@ -247,6 +283,7 @@ export default function ObrasPage() {
             </div>
           )}
         </div>
+        )}
       </div>
 
       {/* Modal */}
